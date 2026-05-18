@@ -17,7 +17,7 @@ const AIRecommendations = () => {
     const fetchEmployee = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${user.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/employees', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/employees`, config);
         const emp = data.find(e => e._id === id);
         if (emp) {
           setEmployee(emp);
@@ -38,7 +38,7 @@ const AIRecommendations = () => {
   const generateRecommendation = async (empData, config) => {
     setGenerating(true);
     try {
-      const { data } = await axios.post('http://localhost:5000/api/ai/recommend', empData, config);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/ai/recommend`, empData, config);
       setRecommendation(data.recommendation);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to generate AI recommendation. Check API key.');

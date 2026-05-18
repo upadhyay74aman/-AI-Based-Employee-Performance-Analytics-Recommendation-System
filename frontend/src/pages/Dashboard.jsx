@@ -18,8 +18,8 @@ const Dashboard = () => {
         headers: { Authorization: `Bearer ${user.token}` }
       };
       const url = department 
-        ? `http://localhost:5000/api/employees/search?department=${department}`
-        : 'http://localhost:5000/api/employees';
+        ? `${import.meta.env.VITE_API_URL}/employees/search?department=${department}`
+        : `${import.meta.env.VITE_API_URL}/employees`;
       
       const { data } = await axios.get(url, config);
       setEmployees(data);
